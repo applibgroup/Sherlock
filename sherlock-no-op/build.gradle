@@ -1,0 +1,16 @@
+apply plugin: 'com.android.library'
+
+ext {
+    artifactId = 'sherlock-no-op'
+}
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion
+    }
+}
+
+apply from: rootProject.file('gradle/publish.gradle')
