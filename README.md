@@ -21,7 +21,6 @@ I) For using Sherlock module in sample app, include the source code and add the 
 ```
 dependencies {
         implementation project(':sherlock')
-        implementation project(':sherlock_no_op')
         implementation fileTree(dir: 'libs', include: ['*.har'])
         testImplementation 'junit:junit:4.13'
 }

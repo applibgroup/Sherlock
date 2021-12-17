@@ -19,7 +19,6 @@ ohos {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar', '*.har'])
     implementation project(':sherlock')
-    implementation project(':sherlock_no_op')
     testImplementation 'junit:junit:4.13.1'
     ohosTestImplementation 'com.huawei.ohos.testkit:runner:1.0.0.200'
 }
