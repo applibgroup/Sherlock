@@ -20,6 +20,7 @@ public class CrashListPresenter {
     List<Crash> crashes = database.getCrashes();
     ArrayList<CrashViewModel> crashViewModels = new ArrayList<>();
     for (Crash crash : crashes) {
+      System.out.println("VIJAY CRASH CALLING 2 "+ crash);
       crashViewModels.add(new CrashViewModel(crash));
     }
     actions.render(new CrashesViewModel(crashViewModels));

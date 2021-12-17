@@ -1,56 +1,56 @@
 package com.singhajit.sherlock.crashes.adapter;
 
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-
-import com.singhajit.sherlock.R;
+import com.example.sherlock.ResourceTable;
 import com.singhajit.sherlock.crashes.viewmodel.AppInfoRowViewModel;
 import com.singhajit.sherlock.crashes.viewmodel.AppInfoViewModel;
+import ohos.agp.components.*;
+import ohos.agp.render.layoutboost.LayoutBoost;
+import ohos.app.Context;
 
 import java.util.List;
 
-public class AppInfoAdapter extends RecyclerView.Adapter<AppInfoViewHolder> {
+public class AppInfoAdapter extends BaseItemProvider {
   private final List<AppInfoRowViewModel> appInfoViewModels;
+  private Context adapterContext;
 
-  public AppInfoAdapter(AppInfoViewModel appInfoViewModel) {
+  public AppInfoAdapter(AppInfoViewModel appInfoViewModel, Context context) {
     this.appInfoViewModels = appInfoViewModel.getAppInfoRowViewModels();
+    this.adapterContext = context;
   }
 
   @Override
-  public AppInfoViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-    LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-    LinearLayout appInfoView = (LinearLayout) inflater.inflate(R.layout.app_info_row, parent, false);
-    return new AppInfoViewHolder(appInfoView);
+  public int getCount() {
+    return 0;
   }
 
   @Override
-  public void onBindViewHolder(AppInfoViewHolder holder, int position) {
-    holder.render(appInfoViewModels.get(position));
+  public Object getItem(int i) {
+    return null;
   }
 
   @Override
-  public int getItemCount() {
-    return appInfoViewModels.size();
-  }
-}
-
-class AppInfoViewHolder extends RecyclerView.ViewHolder {
-  private final LinearLayout rootView;
-
-  AppInfoViewHolder(LinearLayout rootView) {
-    super(rootView);
-    this.rootView = rootView;
+  public long getItemId(int i) {
+    return 0;
   }
 
-  void render(AppInfoRowViewModel appInfoViewModel) {
-    TextView appInfoAttr = (TextView) rootView.findViewById(R.id.app_info_attr);
-    TextView appInfoVal = (TextView) rootView.findViewById(R.id.app_info_val);
+  @Override
+  public Component getComponent(int position, Component component, ComponentContainer componentContainer) {
+
+    component = LayoutBoost.inflate(adapterContext, ResourceTable.Layout_app_info_row,componentContainer,false);
+    render(appInfoViewModels.get(position), component);
+    return component;
+  }
+
+  void render(AppInfoRowViewModel appInfoViewModel, Component componentContainer) {
+
+    Text appInfoAttr = (Text) componentContainer.findComponentById(ResourceTable.Id_app_info_attr);
+    Text appInfoVal = (Text) componentContainer.findComponentById(ResourceTable.Id_app_info_val);
 
     appInfoAttr.setText(appInfoViewModel.getAttr());
     appInfoVal.setText(appInfoViewModel.getVal());
+
   }
+
 }
+
 

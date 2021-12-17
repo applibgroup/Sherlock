@@ -1,14 +1,17 @@
 package com.singhajit.sherlock.core.investigation;
 
-import android.os.Build;
+
 
 public class DeviceInfoProvider {
+
   public static DeviceInfo getDeviceInfo() {
+
     return new DeviceInfo.Builder()
-        .withManufacturer(Build.MANUFACTURER)
-        .withModel(Build.MODEL)
-        .withBrand(Build.BRAND)
-        .withSDK(String.valueOf(Build.VERSION.SDK_INT))
+        .withManufacturer(new ohos.distributedhardware.devicemanager.DeviceInfo().getDeviceName())
+        .withModel(ohos.system.DeviceInfo.getModel())
+        .withBrand(ohos.system.DeviceInfo.getName())
+        .withSDK(ohos.system.DeviceInfo.getDeviceType())
         .build();
   }
+
 }

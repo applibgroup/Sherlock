@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DirectionalLayout
+    xmlns:ohos1="http://schemas.huawei.com/res/ohos"
+    ohos1:height="match_content"
+    ohos1:width="match_parent"
+    ohos1:orientation="vertical">
+
+    <DirectionalLayout
+        ohos1:height="match_content"
+        ohos1:width="match_parent"
+        ohos1:bottom_margin="10vp"
+        ohos1:orientation="vertical"
+        ohos1:top_margin="10vp">
+
+        <Text
+            ohos1:height="match_content"
+            ohos1:width="match_content"
+            ohos1:text="name"
+            />
+
+        <Text
+            ohos1:id="$+id:device_name"
+            ohos1:height="match_content"
+            ohos1:width="match_parent"
+            ohos1:text="21"
+            />
+    </DirectionalLayout>
+
+    <DirectionalLayout
+        ohos1:height="match_content"
+        ohos1:width="match_parent"
+        ohos1:bottom_margin="10vp"
+        ohos1:orientation="horizontal"
+        >
+
+        <Text
+            ohos1:height="match_content"
+            ohos1:width="match_content"
+            ohos1:text="Brand"
+            />
+
+        <Text
+            ohos1:id="$+id:device_brand"
+            ohos1:height="match_content"
+            ohos1:width="match_parent"
+            ohos1:text="21"/>
+    </DirectionalLayout>
+
+    <DirectionalLayout
+        ohos1:height="match_content"
+        ohos1:width="match_parent"
+        ohos1:orientation="horizontal"
+        >
+
+        <Text
+            ohos1:height="match_content"
+            ohos1:width="match_content"
+            ohos1:text="api version"
+            />
+
+        <Text
+            ohos1:id="$+id:device_android_version"
+            ohos1:height="match_content"
+            ohos1:width="match_parent"
+            ohos1:text="21"
+            />
+    </DirectionalLayout>
+</DirectionalLayout>

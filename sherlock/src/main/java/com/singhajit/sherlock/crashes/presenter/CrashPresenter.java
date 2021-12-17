@@ -16,6 +16,7 @@ public class CrashPresenter {
 
   public void render(int crashId) {
     Crash crash = database.getCrashById(crashId);
+    System.out.println("VIJAY CRASH CALLING 3 "+ crash);
     CrashViewModel crashViewModel = new CrashViewModel(crash);
 
     actions.render(crashViewModel);

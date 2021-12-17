@@ -1,6 +1,6 @@
 package com.singhajit.sherlock.crashes.util;
 
-import android.view.View;
+import ohos.agp.components.Component;
 
 public class ViewState {
 
@@ -23,7 +23,7 @@ public class ViewState {
     }
 
     public ViewState build() {
-      return new ViewState(isVisible ? View.VISIBLE : View.GONE);
+      return new ViewState(isVisible ? Component.VISIBLE : Component.HIDE);
     }
   }
 }

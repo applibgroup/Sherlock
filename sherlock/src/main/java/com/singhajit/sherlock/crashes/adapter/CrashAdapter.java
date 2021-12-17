@@ -1,62 +1,65 @@
 package com.singhajit.sherlock.crashes.adapter;
 
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-
-import com.singhajit.sherlock.R;
+import com.example.sherlock.ResourceTable;
 import com.singhajit.sherlock.core.investigation.CrashViewModel;
 import com.singhajit.sherlock.crashes.presenter.CrashListPresenter;
+import com.singhajit.sherlock.crashes.viewmodel.AppInfoRowViewModel;
+import ohos.agp.components.BaseItemProvider;
+import ohos.agp.components.Component;
+import ohos.agp.components.ComponentContainer;
+import ohos.agp.components.Text;
+import ohos.agp.render.layoutboost.LayoutBoost;
+import ohos.app.Context;
 
 import java.util.List;
 
-public class CrashAdapter extends RecyclerView.Adapter<CrashViewHolder> {
+public class CrashAdapter extends BaseItemProvider {
   private final List<CrashViewModel> crashes;
   private final CrashListPresenter presenter;
+  private Context adapterContext;
 
-  public CrashAdapter(List<CrashViewModel> crashes, CrashListPresenter presenter) {
+  public CrashAdapter(List<CrashViewModel> crashes, CrashListPresenter presenter, Context context) {
     this.crashes = crashes;
     this.presenter = presenter;
+    this.adapterContext = context;
   }
 
   @Override
-  public CrashViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-    LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-    LinearLayout crashCardView = (LinearLayout) inflater.inflate(R.layout.crash_card, parent, false);
-    return new CrashViewHolder(crashCardView);
+  public int getCount() {
+    return 0;
   }
 
   @Override
-  public void onBindViewHolder(CrashViewHolder holder, int position) {
-    holder.render(crashes.get(position), presenter);
+  public Object getItem(int i) {
+    return null;
   }
 
   @Override
-  public int getItemCount() {
-    return crashes.size();
-  }
-}
-
-class CrashViewHolder extends RecyclerView.ViewHolder {
-  private final LinearLayout rootView;
-
-  CrashViewHolder(LinearLayout rootView) {
-    super(rootView);
-    this.rootView = rootView;
+  public long getItemId(int i) {
+    return 0;
   }
 
-  void render(final CrashViewModel crashViewModel, final CrashListPresenter presenter) {
-    TextView crashPlace = (TextView) rootView.findViewById(R.id.crash_place);
-    TextView crashDate = (TextView) rootView.findViewById(R.id.crash_date);
+  @Override
+  public Component getComponent(int pos, Component component, ComponentContainer componentContainer) {
+
+    component = LayoutBoost.inflate(adapterContext, ResourceTable.Layout_crash_card,componentContainer,false);
+
+    render(crashes.get(pos), presenter, component);
+
+
+    return component;
+  }
+
+  void render(final CrashViewModel crashViewModel, final CrashListPresenter presenter, Component componentContainer) {
+
+    Text crashPlace = (Text) componentContainer.findComponentById(ResourceTable.Id_crash_place);
+    Text crashDate = (Text) componentContainer.findComponentById(ResourceTable.Id_crash_date);
 
     crashPlace.setText(crashViewModel.getPlace());
     crashDate.setText(crashViewModel.getDate());
-    rootView.findViewById(R.id.crash_card_view).setOnClickListener(new View.OnClickListener() {
+    componentContainer.findComponentById(ResourceTable.Id_crash_card_view).setClickedListener(new Component.ClickedListener() {
       @Override
-      public void onClick(View view) {
+      public void onClick(Component component) {
         presenter.onCrashClicked(crashViewModel);
       }
     });

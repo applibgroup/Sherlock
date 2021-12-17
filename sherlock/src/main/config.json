@@ -1,0 +1,39 @@
+{
+  "app": {
+    "bundleName": "com.example.myapplication.hmservice",
+    "vendor": "example",
+    "version": {
+      "code": 1000000,
+      "name": "1.0.0"
+    }
+  },
+  "deviceConfig": {
+  },
+  "module": {
+    "package": "com.example.sherlock",
+    "mainAbility": "com.singhajit.sherlock.crashes.activity.CrashActivity",
+    "deviceType": [
+      "phone",
+      "tablet",
+      "tv",
+      "wearable",
+      "car"
+    ],
+    "distro": {
+      "deliveryWithInstall": true,
+      "moduleName": "sherlock",
+      "moduleType": "har"
+    },
+    "abilities": [
+      {
+        "orientation": "unspecified",
+        "visible": true,
+        "name": "com.singhajit.sherlock.crashes.activity.CrashActivity",
+        "description": "$string:mainability_description",
+        "label": "$string:entry_MainAbility",
+        "type": "page",
+        "launchType": "standard"
+      }
+    ]
+  }
+}
