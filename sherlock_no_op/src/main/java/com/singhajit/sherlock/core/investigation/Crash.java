@@ -19,9 +19,6 @@ public class Crash {
         return new AppInfo();
     }
 
-    public void setId() {
-    }
-
     public Class<Crash> getType() {
         return Crash.class;
     }

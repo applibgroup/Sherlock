@@ -9,8 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Sherlock {
-    public static void init() {
-    }
 
     public static boolean isInitialized() {
         return false;
@@ -22,9 +20,6 @@ public class Sherlock {
 
     public List<Crash> getAllCrashes() {
         return new ArrayList<>();
-    }
-
-    public static void setAppInfoProvider() {
     }
 
     public AppInfoProvider getAppInfoProvider() {

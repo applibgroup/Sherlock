@@ -58,7 +58,7 @@ public class SherlockDatabaseHelper extends RdbOpenCallback {
         valuesBucket.putString(CrashTable.DATE, crashRecord.getDate());
         long id = hmosRdbStore.insert(CrashTable.TABLE_NAME, valuesBucket);
         hmosRdbStore.close();
-        return (int)id;
+        return (int) id;
     }
 
     /**
