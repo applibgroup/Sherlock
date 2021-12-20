@@ -20,7 +20,6 @@ public class Crash {
     }
 
     public void setId() {
-        return;
     }
 
     public Class<Crash> getType() {

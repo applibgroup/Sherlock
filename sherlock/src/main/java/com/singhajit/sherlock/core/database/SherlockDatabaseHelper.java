@@ -50,7 +50,7 @@ public class SherlockDatabaseHelper extends RdbOpenCallback {
      * @param crashRecord crash record
      * @return inserted row id
      */
-    public long insertCrash(CrashRecord crashRecord) {
+    public int insertCrash(CrashRecord crashRecord) {
         ValuesBucket valuesBucket = new ValuesBucket();
         valuesBucket.putString(CrashTable.PLACE, crashRecord.getPlace());
         valuesBucket.putString(CrashTable.REASON, crashRecord.getReason());
@@ -58,7 +58,7 @@ public class SherlockDatabaseHelper extends RdbOpenCallback {
         valuesBucket.putString(CrashTable.DATE, crashRecord.getDate());
         long id = hmosRdbStore.insert(CrashTable.TABLE_NAME, valuesBucket);
         hmosRdbStore.close();
-        return Long.valueOf(id).intValue();
+        return (int)id;
     }
 
     /**
@@ -71,9 +71,9 @@ public class SherlockDatabaseHelper extends RdbOpenCallback {
         ResultSet resultSet = hmosRdbStore.querySql(CrashTable.selectById(id), null);
         Crash crash = null;
         if (resultSet != null && isCursorPopulated(resultSet)) {
-                crash = toCrash(resultSet);
-                resultSet.close();
-                hmosRdbStore.close();
+            crash = toCrash(resultSet);
+            resultSet.close();
+            hmosRdbStore.close();
         }
         return crash;
     }

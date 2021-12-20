@@ -10,7 +10,6 @@ import java.util.List;
 
 public class Sherlock {
     public static void init() {
-        return;
     }
 
     public static boolean isInitialized() {
@@ -26,7 +25,6 @@ public class Sherlock {
     }
 
     public static void setAppInfoProvider() {
-        return;
     }
 
     public AppInfoProvider getAppInfoProvider() {
