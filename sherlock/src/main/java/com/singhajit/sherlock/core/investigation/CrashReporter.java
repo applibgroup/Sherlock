@@ -10,7 +10,6 @@ import ohos.event.intentagent.IntentAgentInfo;
 import ohos.event.notification.NotificationHelper;
 import ohos.event.notification.NotificationRequest;
 import ohos.rpc.RemoteException;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;

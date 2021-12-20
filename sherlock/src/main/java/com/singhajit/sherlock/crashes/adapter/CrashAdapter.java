@@ -75,7 +75,7 @@ public class CrashAdapter extends BaseItemProvider {
      *
      * @param componentContainer container
      */
-    public void render(final CrashViewModel crashViewModel, final CrashListPresenter presenter, Component componentContainer) {
+    public void render(CrashViewModel crashViewModel, CrashListPresenter presenter, Component componentContainer) {
         Text crashPlace = (Text) componentContainer.findComponentById(ResourceTable.Id_crash_place);
         Text crashDate = (Text) componentContainer.findComponentById(ResourceTable.Id_crash_date);
         crashPlace.setText(crashViewModel.getPlace());
