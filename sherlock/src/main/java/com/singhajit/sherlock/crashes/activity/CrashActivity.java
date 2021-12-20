@@ -1,22 +1,26 @@
 package com.singhajit.sherlock.crashes.activity;
 
-import com.example.sherlock.ResourceTable;
-
-import com.singhajit.sherlock.core.investigation.CrashViewModel;
-import com.singhajit.sherlock.crashes.action.CrashActions;
-import com.singhajit.sherlock.crashes.adapter.AppInfoAdapter;
-import com.singhajit.sherlock.crashes.viewmodel.AppInfoViewModel;
 import ohos.aafwk.ability.Ability;
 import ohos.aafwk.content.Intent;
 import ohos.agp.components.DirectionalLayoutManager;
 import ohos.agp.components.ListContainer;
 import ohos.agp.components.Text;
-
+import com.example.sherlock.ResourceTable;
+import com.singhajit.sherlock.core.investigation.CrashViewModel;
+import com.singhajit.sherlock.crashes.action.CrashActions;
+import com.singhajit.sherlock.crashes.adapter.AppInfoAdapter;
+import com.singhajit.sherlock.crashes.viewmodel.AppInfoViewModel;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
+/**
+ * Crash Activity.
+ */
 public class CrashActivity extends Ability implements CrashActions {
 
+    /**
+     * CRASH ID.
+     */
     public static final String CRASH_ID = "com.singhajit.sherlock.CRASH_ID";
 
     @Override

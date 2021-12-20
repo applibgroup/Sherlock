@@ -19,7 +19,6 @@ package com.example.myapplication.slice;
 import ohos.aafwk.ability.AbilitySlice;
 import ohos.aafwk.content.Intent;
 import ohos.agp.components.Button;
-import ohos.agp.components.Component;
 import com.example.myapplication.ResourceTable;
 import com.singhajit.sherlock.core.Sherlock;
 

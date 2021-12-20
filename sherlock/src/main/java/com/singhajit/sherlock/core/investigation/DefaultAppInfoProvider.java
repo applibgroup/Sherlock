@@ -1,9 +1,7 @@
 package com.singhajit.sherlock.core.investigation;
 
-
-
-import com.singhajit.sherlock.util.AppInfoUtil;
 import ohos.app.Context;
+import com.singhajit.sherlock.util.AppInfoUtil;
 
 public class DefaultAppInfoProvider implements AppInfoProvider {
     private final Context context;

@@ -7,7 +7,7 @@
 
 
     <DirectionalLayout
-        ohos:id="$+id:no_crash_found_layout"
+        ohos:id="$+id:no_crash"
         xmlns:ohos="http://schemas.huawei.com/res/ohos"
         ohos:height="match_parent"
         ohos:width="match_parent"
