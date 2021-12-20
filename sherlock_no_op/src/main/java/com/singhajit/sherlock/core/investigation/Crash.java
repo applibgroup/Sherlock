@@ -3,7 +3,6 @@ package com.singhajit.sherlock.core.investigation;
 import java.util.Date;
 
 public class Crash {
-
     public static final String DATE_FORMAT = "EEE MMM dd kk:mm:ss z yyyy";
 
     public Crash(String place, String reason, String stackTrace) {
