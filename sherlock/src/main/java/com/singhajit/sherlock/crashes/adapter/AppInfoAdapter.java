@@ -11,7 +11,7 @@ import java.util.List;
 
 public class AppInfoAdapter extends BaseItemProvider {
   private final List<AppInfoRowViewModel> appInfoViewModels;
-  private Context adapterContext;
+  final private Context adapterContext;
 
   public AppInfoAdapter(AppInfoViewModel appInfoViewModel, Context context) {
     this.appInfoViewModels = appInfoViewModel.getAppInfoRowViewModels();
@@ -36,9 +36,10 @@ public class AppInfoAdapter extends BaseItemProvider {
   @Override
   public Component getComponent(int position, Component component, ComponentContainer componentContainer) {
 
-    component = LayoutBoost.inflate(adapterContext, ResourceTable.Layout_app_info_row,componentContainer,false);
-    render(appInfoViewModels.get(position), component);
-    return component;
+    Component view = LayoutBoost.inflate(adapterContext, ResourceTable.Layout_app_info_row,componentContainer,false);
+    render(appInfoViewModels.get(position), view);
+
+    return view;
   }
 
   void render(AppInfoRowViewModel appInfoViewModel, Component componentContainer) {

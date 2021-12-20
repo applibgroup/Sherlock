@@ -42,7 +42,7 @@ public class CrashAnalyzer {
   }
 
   private static String stackTrace(StackTraceElement[] stackTrace) {
-    List<StackTraceElement> stackTraceElements = Arrays.asList(stackTrace);
+    StackTraceElement[] stackTraceElements = stackTrace;
     StringBuilder builder = new StringBuilder();
     for (StackTraceElement stackTraceElement : stackTraceElements) {
       builder.append("at ");

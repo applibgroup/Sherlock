@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 public class AppInfoViewModel {
-  private ArrayList<AppInfoRowViewModel> appInfoRowViewModels;
+  private final ArrayList<AppInfoRowViewModel> appInfoRowViewModels;
 
   public AppInfoViewModel(AppInfo appInfo) {
     Map<String, String> appDetails = appInfo.getAppDetails();
@@ -25,7 +25,7 @@ public class AppInfoViewModel {
   public String getDetails() {
     StringBuilder builder = new StringBuilder();
     for (AppInfoRowViewModel appInfoRowViewModel : appInfoRowViewModels) {
-      builder.append(appInfoRowViewModel.getAttr() + ": " + appInfoRowViewModel.getVal() + "\n");
+      builder.append(appInfoRowViewModel.getAttr()).append(": ").append(appInfoRowViewModel.getVal()).append("\n");
     }
 
     return builder.toString();

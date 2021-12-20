@@ -28,11 +28,6 @@ public class Sherlock {
   }
 
   public AppInfoProvider getAppInfoProvider() {
-    return new AppInfoProvider() {
-      @Override
-      public AppInfo getAppInfo() {
-        return new AppInfo();
-      }
-    };
+    return () -> new AppInfo();
   }
 }

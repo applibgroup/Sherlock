@@ -31,7 +31,6 @@ public class CrashActivity extends Ability implements CrashActions {
             Text text = (Text) findComponentById(ResourceTable.Id_crash);
             text.setText(errors.toString());
         }
-
     }
 
     @Override

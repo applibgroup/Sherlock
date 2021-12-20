@@ -37,11 +37,10 @@ public class MainAbilitySlice extends AbilitySlice {
         super.setUIContent(ResourceTable.Layout_ability_main);
         Sherlock.init(this);
         Button button = (Button) findComponentById(ResourceTable.Id_button);
-        button.setClickedListener(new Component.ClickedListener() {
-            @Override
-            public void onClick(Component component) {
-                int x = 10/0;
-            }
+        button.setClickedListener(component -> {
+            int x = 10;
+            int y = 0;
+            x = x / y;
         });
     }
 

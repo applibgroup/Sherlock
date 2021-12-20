@@ -39,27 +39,19 @@ public class CrashViewModel {
 
   public String getCrashInfo() {
 
-      StringBuilder crashInfo = new StringBuilder();
-
-      crashInfo.append("Device Info:\n");
-
-      crashInfo.append("Name: ");
-      crashInfo.append(getDeviceName() + "\n");
-
-      crashInfo.append("Brand: ");
-      crashInfo.append(getDeviceBrand() + "\n");
-
-      crashInfo.append("Android API: ");
-      crashInfo.append(getDeviceAndroidApiVersion() + "\n\n");
-
-      crashInfo.append("App Info:\n");
-      crashInfo.append(getAppInfoViewModel().getDetails());
-      crashInfo.append("\n");
-
-      crashInfo.append("StackTrace:\n");
-      crashInfo.append(getStackTrace() + "\n");
-
-      return crashInfo.toString();
+      String crashInfo = "Device Info:\n" +
+              "Name: " +
+              getDeviceName() + "\n" +
+              "Brand: " +
+              getDeviceBrand() + "\n" +
+              "Android API: " +
+              getDeviceAndroidApiVersion() + "\n\n" +
+              "App Info:\n" +
+              getAppInfoViewModel().getDetails() +
+              "\n" +
+              "StackTrace:\n" +
+              getStackTrace() + "\n";
+      return crashInfo;
 
 
   }

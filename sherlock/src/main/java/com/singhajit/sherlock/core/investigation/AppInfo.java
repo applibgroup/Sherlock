@@ -21,7 +21,7 @@ public class AppInfo {
   }
 
   public static class Builder {
-    List<Pair> appDetails = new ArrayList<>();
+    final List<Pair> appDetails = new ArrayList<>();
 
     public Builder with(String key, String value) {
       appDetails.add(new Pair(key, value));

@@ -16,9 +16,9 @@
 
 package com.example.myapplication;
 
-import com.example.myapplication.slice.MainAbilitySlice;
 import ohos.aafwk.ability.Ability;
 import ohos.aafwk.content.Intent;
+import com.example.myapplication.slice.MainAbilitySlice;
 
 /**
  * MainAbility class.
