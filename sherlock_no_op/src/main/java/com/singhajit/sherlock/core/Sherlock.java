@@ -9,27 +9,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Sherlock {
-  public static void init(final Context context) {
-    return;
-  }
+    public static void init(final Context context) {
+        return;
+    }
 
-  public static boolean isInitialized() {
-    return false;
-  }
+    public static boolean isInitialized() {
+        return false;
+    }
 
-  public static Sherlock getInstance() {
-    return new Sherlock();
-  }
+    public static Sherlock getInstance() {
+        return new Sherlock();
+    }
 
-  public List<Crash> getAllCrashes() {
-    return new ArrayList<>();
-  }
+    public List<Crash> getAllCrashes() {
+        return new ArrayList<>();
+    }
 
-  public static void setAppInfoProvider(AppInfoProvider appInfoProvider) {
-    return;
-  }
+    public static void setAppInfoProvider(AppInfoProvider appInfoProvider) {
+        return;
+    }
 
-  public AppInfoProvider getAppInfoProvider() {
-    return () -> new AppInfo();
-  }
+    public AppInfoProvider getAppInfoProvider() {
+        return () -> new AppInfo();
+    }
 }

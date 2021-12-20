@@ -10,39 +10,36 @@ public class CrashRecord {
     private String date;
     private String stackTrace;
 
-  /**
-   * constructor.
-   *
-   * @param place place
-   *
-   * @param reason reason
-   *
-   * @param date date
-   *
-   * @param stackTrace stackTrace
-   */
+    /**
+     * Constructor.
+     *
+     * @param place place
+     * @param reason reason
+     * @param date date
+     * @param stackTrace stack trace
+     */
     public CrashRecord(String place, String reason, String date, String stackTrace) {
-      this.place = place;
-      this.reason = reason;
-      this.date = date;
-      this.stackTrace = stackTrace;
+        this.place = place;
+        this.reason = reason;
+        this.date = date;
+        this.stackTrace = stackTrace;
     }
 
     public String getPlace() {
-    return place;
-  }
+        return place;
+    }
 
     public String getReason() {
-    return reason;
-  }
+        return reason;
+    }
 
     public String getDate() {
-    return date;
-  }
+        return date;
+    }
 
     public String getStackTrace() {
-    return stackTrace;
-  }
+        return stackTrace;
+    }
 
     public static CrashRecord createFrom(Crash crash) {
         SimpleDateFormat dateFormat = new SimpleDateFormat(Crash.DATE_FORMAT);

@@ -14,20 +14,20 @@ public class DeviceInfo {
     }
 
     public String getManufacturer() {
-    return manufacturer;
-  }
+        return manufacturer;
+    }
 
     public String getBrand() {
-    return brand;
-  }
+        return brand;
+    }
 
     public String getName() {
-    return name;
-  }
+        return name;
+    }
 
     public String getSdk() {
-    return sdk;
-  }
+        return sdk;
+    }
 
     public static class Builder {
         private String name;
@@ -56,7 +56,7 @@ public class DeviceInfo {
         }
 
         public DeviceInfo build() {
-      return new DeviceInfo(brand, manufacturer, name, sdk);
-    }
+            return new DeviceInfo(brand, manufacturer, name, sdk);
+        }
     }
 }

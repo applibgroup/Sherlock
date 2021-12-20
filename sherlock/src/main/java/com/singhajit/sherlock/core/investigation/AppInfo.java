@@ -9,8 +9,8 @@ public class AppInfo {
     private List<Pair> appDetails = new ArrayList<>();
 
     private AppInfo(List<Pair> appDetails) {
-    this.appDetails = appDetails;
-  }
+        this.appDetails = appDetails;
+    }
 
     public Map<String, String> getAppDetails() {
         TreeMap<String, String> details = new TreeMap<>();
@@ -29,7 +29,7 @@ public class AppInfo {
         }
 
         public AppInfo build() {
-      return new AppInfo(appDetails);
-    }
+            return new AppInfo(appDetails);
+        }
     }
 }

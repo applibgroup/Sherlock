@@ -10,17 +10,14 @@ public class CrashTable implements BaseColumns {
     public static final String STACKTRACE = "stacktrace";
     public static final String DATE = "date";
 
-    public static final String CREATE_QUERY = "create table " + TABLE_NAME + " (" +
-        ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-        PLACE + " TEXT, " +
-        REASON + " TEXT, " +
-        STACKTRACE + " TEXT, " +
-        DATE + " TEXT)";
+    public static final String CREATE_QUERY = "create table " + TABLE_NAME + " ("
+            + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + PLACE + " TEXT, " + REASON + " TEXT, "
+            + STACKTRACE + " TEXT, " + DATE + " TEXT)";
 
     public static final String DROP_QUERY = "drop table " + TABLE_NAME;
     public static final String TRUNCATE_QUERY = "delete from " + TABLE_NAME;
     public static final String SELECT_ALL = "SELECT * FROM " + TABLE_NAME + " ORDER BY " + ID + " DESC";
     public static String selectById(int id) {
-    return "SELECT * FROM " + TABLE_NAME + " WHERE " + ID + " = " + id;
-  }
+        return "SELECT * FROM " + TABLE_NAME + " WHERE " + ID + " = " + id;
+    }
 }

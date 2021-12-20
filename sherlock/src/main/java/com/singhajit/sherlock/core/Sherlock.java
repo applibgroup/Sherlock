@@ -16,42 +16,46 @@ public class Sherlock {
     private final AppInfoProvider appInfoProvider;
     /**
      * TYPE.
-    */
+     */
     private static final int HILOG_TYPE = 3;
     /**
      * DOMAIN.
-    */
+     */
     private static final int HILOG_DOMAIN = 0xD000F00;
     /**
      * LABEL.
-    */
+     */
     private static final HiLogLabel LABEL = new HiLogLabel(HILOG_TYPE, HILOG_DOMAIN, TAG);
 
     private Sherlock(Context context) {
-      database = new SherlockDatabaseHelper(context);
-      crashReporter = new CrashReporter(context);
-      appInfoProvider = new DefaultAppInfoProvider(context);
+        database = new SherlockDatabaseHelper(context);
+        crashReporter = new CrashReporter(context);
+        appInfoProvider = new DefaultAppInfoProvider(context);
     }
 
     public static boolean isInitialized() {
-    return instance != null;
-  }
+        return instance != null;
+    }
 
     public static Sherlock getInstance() {
         if (!isInitialized()) {
             throw new SherlockNotInitializedException();
         }
-        HiLog.debug(LABEL,"Returning existing instance...");
+        HiLog.debug(LABEL, "Returning existing instance...");
         return instance;
     }
 
     public AppInfoProvider getAppInfoProvider() {
-    return getInstance().appInfoProvider;
-  }
+        return getInstance().appInfoProvider;
+    }
 
-    public static void init(final Context context){
+    /**
+     * Instantiating sherlock object.
+     *
+     * @param context context
+     */
+    public static void init(final Context context) {
         instance = new Sherlock(context);
-
         Thread.setDefaultUncaughtExceptionHandler((thread, ex) -> instance.crashReporter.reportCollection(ex));
     }
 }

@@ -11,49 +11,33 @@ public class CrashViewModel {
   }
 
   public CrashViewModel(Crash crash) {
-    System.out.println("VIJAY CRASH is there "+ crash);
     populate(crash);
   }
 
   public String getPlace() {
-
       String[] placeTrail = crash.getPlace().split("\\.");
       return placeTrail[placeTrail.length - 1];
-
   }
 
   public String getExactLocationOfCrash() {
-
         return crash.getPlace();
   }
 
   public String getReasonOfCrash() {
     return crash.getReason();
-
   }
 
   public String getStackTrace() {
     return crash.getStackTrace();
-
   }
 
   public String getCrashInfo() {
-
-      String crashInfo = "Device Info:\n" +
-              "Name: " +
-              getDeviceName() + "\n" +
-              "Brand: " +
-              getDeviceBrand() + "\n" +
-              "Android API: " +
-              getDeviceAndroidApiVersion() + "\n\n" +
-              "App Info:\n" +
-              getAppInfoViewModel().getDetails() +
-              "\n" +
-              "StackTrace:\n" +
-              getStackTrace() + "\n";
-      return crashInfo;
-
-
+      return "Device Info:\n"
+              + "Name: " + getDeviceName() + "\n"
+              + "Brand: " + getDeviceBrand() + "\n"
+              + "Android API: " + getDeviceAndroidApiVersion() + "\n\n"
+              + "App Info:\n" + getAppInfoViewModel().getDetails() + "\n"
+              + "StackTrace:\n" + getStackTrace() + "\n";
   }
 
   public String getDeviceManufacturer() {

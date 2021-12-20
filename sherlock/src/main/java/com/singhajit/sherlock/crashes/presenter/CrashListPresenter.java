@@ -10,23 +10,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CrashListPresenter {
-  private final CrashListActions actions;
+    private final CrashListActions actions;
 
-  public CrashListPresenter(CrashListActions actions) {
-    this.actions = actions;
-  }
-
-  public void render(SherlockDatabaseHelper database) {
-    List<Crash> crashes = database.getCrashes();
-    ArrayList<CrashViewModel> crashViewModels = new ArrayList<>();
-    for (Crash crash : crashes) {
-      System.out.println("VIJAY CRASH CALLING 2 "+ crash);
-      crashViewModels.add(new CrashViewModel(crash));
+    public CrashListPresenter(CrashListActions actions) {
+        this.actions = actions;
     }
-    actions.render(new CrashesViewModel(crashViewModels));
-  }
 
-  public void onCrashClicked(CrashViewModel viewModel) {
-    actions.openCrashDetails(viewModel.getIdentifier());
-  }
+    public void render(SherlockDatabaseHelper database) {
+        List<Crash> crashes = database.getCrashes();
+        ArrayList<CrashViewModel> crashViewModels = new ArrayList<>();
+        for (Crash crash : crashes) {
+            crashViewModels.add(new CrashViewModel(crash));
+        }
+        actions.render(new CrashesViewModel(crashViewModels));
+    }
+
+    public void onCrashClicked(CrashViewModel viewModel) {
+        actions.openCrashDetails(viewModel.getIdentifier());
+    }
 }

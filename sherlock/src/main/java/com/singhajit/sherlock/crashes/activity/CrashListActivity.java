@@ -18,12 +18,12 @@ import com.singhajit.sherlock.crashes.viewmodel.CrashesViewModel;
 public class CrashListActivity extends Ability implements CrashListActions {
     /**
      * Crash list presenter.
-    */
+     */
     private CrashListPresenter presenter;
 
     /**
      * Crash list presenter.
-    */
+     */
     @Override
     protected void onStart(Intent intent) {
         super.onStart(intent);

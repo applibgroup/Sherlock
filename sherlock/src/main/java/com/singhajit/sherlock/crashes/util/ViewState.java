@@ -7,12 +7,12 @@ public class ViewState {
     private final int visibility;
 
     private ViewState(int visibility) {
-    this.visibility = visibility;
-  }
+        this.visibility = visibility;
+    }
 
     public int getVisibility() {
-    return visibility;
-  }
+        return visibility;
+    }
 
     public static class Builder {
         private boolean isVisible;
@@ -23,7 +23,7 @@ public class ViewState {
         }
 
         public ViewState build() {
-      return new ViewState(isVisible ? Component.VISIBLE : Component.HIDE);
-    }
+            return new ViewState(isVisible ? Component.VISIBLE : Component.HIDE);
+        }
     }
 }

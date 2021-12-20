@@ -4,17 +4,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AppInfo {
-  public Map<String, String> getAppDetails() {
-    return new HashMap<>();
-  }
-
-  public static class Builder {
-    public Builder with(String key, String value) {
-      return this;
+    public Map<String, String> getAppDetails() {
+        return new HashMap<>();
     }
 
-    public AppInfo build() {
-      return new AppInfo();
+    public static class Builder {
+        public Builder with() {
+            return this;
+        }
+
+        public AppInfo build() {
+            return new AppInfo();
+        }
     }
-  }
 }

@@ -1,14 +1,19 @@
 package com.singhajit.sherlock.core.database;
 
-import com.singhajit.sherlock.core.investigation.Crash;
 import ohos.app.Context;
 import ohos.data.DatabaseHelper;
-import ohos.data.rdb.*;
+import ohos.data.rdb.RdbOpenCallback;
+import ohos.data.rdb.RdbStore;
+import ohos.data.rdb.StoreConfig;
+import ohos.data.rdb.ValuesBucket;
 import ohos.data.resultset.ResultSet;
-
+import com.singhajit.sherlock.core.investigation.Crash;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Sherlock Database helper class.
+ */
 public class SherlockDatabaseHelper extends RdbOpenCallback {
 
     private static final int VERSION = 2;
@@ -26,47 +31,46 @@ public class SherlockDatabaseHelper extends RdbOpenCallback {
     public List<Crash> getCrashes() {
         ArrayList<Crash> crashes = new ArrayList<>();
         ResultSet resultSet = hmosRdbStore.querySql(CrashTable.SELECT_ALL, null);
-        if(resultSet != null) {
-            if (isCursorPopulated(resultSet)) {
-                do {
-                  crashes.add(toCrash(resultSet));
-                } while (resultSet.goToFirstRow());
-            }
+        if (resultSet != null && isCursorPopulated(resultSet)) {
+            do {
+                crashes.add(toCrash(resultSet));
+            } while (resultSet.goToFirstRow());
+
         }
-
-      if(resultSet != null) {
-          resultSet.close();
-          hmosRdbStore.close();
-      }
-
-      return crashes;
+        if (resultSet != null) {
+            resultSet.close();
+            hmosRdbStore.close();
+        }
+        return crashes;
     }
 
+    /**
+     * Inserting crash record.
+     *
+     * @param crashRecord crash record
+     * @return inserted row id
+     */
     public int insertCrash(CrashRecord crashRecord) {
         ValuesBucket valuesBucket = new ValuesBucket();
-        valuesBucket.putString(CrashTable.PLACE,crashRecord.getPlace());
-        valuesBucket.putString(CrashTable.REASON,crashRecord.getReason());
-        valuesBucket.putString(CrashTable.STACKTRACE,crashRecord.getStackTrace());
-        valuesBucket.putString(CrashTable.DATE,crashRecord.getDate());
-
+        valuesBucket.putString(CrashTable.PLACE, crashRecord.getPlace());
+        valuesBucket.putString(CrashTable.REASON, crashRecord.getReason());
+        valuesBucket.putString(CrashTable.STACKTRACE, crashRecord.getStackTrace());
+        valuesBucket.putString(CrashTable.DATE, crashRecord.getDate());
         long id = hmosRdbStore.insert(CrashTable.TABLE_NAME, valuesBucket);
         hmosRdbStore.close();
-
         return Long.valueOf(id).intValue();
     }
 
     public Crash getCrashById(int id) {
         ResultSet resultSet = hmosRdbStore.querySql(CrashTable.selectById(id), null);
         Crash crash = null;
-
         if (isCursorPopulated(resultSet)) {
             crash = toCrash(resultSet);
-            if (resultSet !=null) {
+            if (resultSet != null) {
                 resultSet.close();
                 hmosRdbStore.close();
             }
         }
-
         return crash;
     }
 

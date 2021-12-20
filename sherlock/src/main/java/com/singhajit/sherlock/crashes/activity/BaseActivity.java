@@ -8,9 +8,9 @@ import ohos.aafwk.content.Intent;
  */
 public class BaseActivity extends AbilitySlice {
 
-  /**
-   * onStart.
-   */
+    /**
+     * onStart.
+     */
     @Override
     protected void onStart(Intent intent) {
         super.onStart(intent);

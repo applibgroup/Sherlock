@@ -10,10 +10,10 @@ class Pair {
     }
 
     public String getKey() {
-    return key;
-  }
+        return key;
+    }
 
     public String getVal() {
-    return val;
-  }
+        return val;
+    }
 }
