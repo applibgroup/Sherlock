@@ -40,7 +40,6 @@ allprojects {
 
         source 'entry/src/main/java'
         source 'sherlock/src/main/java'
-        source 'sherlock_no_op/src/main/java'
         include '**/*.java'
 
         classpath = files()
@@ -57,7 +56,7 @@ sonarqube {
         property "sonar.organization", "applibgroup"
         property "sonar.host.url", "https://sonarcloud.io"
         property "sonar.sources", "entry,sherlock,sherlock_no_op"
-        property "sonar.java.binaries", "entry/build,sherlock/build,sherlock_no_op/build"
+        property "sonar.java.binaries", "entry/build,sherlock/build"
         property "sonar.java.checkstyle.reportPaths", "build/reports/checkstyle/checkstyle.xml"
     }
 }
