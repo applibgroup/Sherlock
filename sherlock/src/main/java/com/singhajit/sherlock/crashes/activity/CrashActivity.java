@@ -10,7 +10,6 @@ import com.singhajit.sherlock.core.investigation.CrashViewModel;
 import com.singhajit.sherlock.crashes.action.CrashActions;
 import com.singhajit.sherlock.crashes.adapter.AppInfoAdapter;
 import com.singhajit.sherlock.crashes.viewmodel.AppInfoViewModel;
-
 import java.io.PrintWriter;
 import java.io.StringWriter;
 

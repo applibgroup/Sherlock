@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Sherlock {
-    public static void init(final Context context) {
+    public static void init() {
         return;
     }
 
@@ -25,7 +25,7 @@ public class Sherlock {
         return new ArrayList<>();
     }
 
-    public static void setAppInfoProvider(AppInfoProvider appInfoProvider) {
+    public static void setAppInfoProvider() {
         return;
     }
 

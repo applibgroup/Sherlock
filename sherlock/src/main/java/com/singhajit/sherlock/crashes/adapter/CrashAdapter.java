@@ -30,7 +30,13 @@ public class CrashAdapter extends BaseItemProvider {
     private Context adapContext;
 
     /**
-     * Crash Adapter constructor.
+     * CrashAdapter constructor.
+     *
+     * @param crashes crashes
+     *
+     * @param presenter presenter
+     *
+     * @param context context
      */
     public CrashAdapter(List<CrashViewModel> crashes, CrashListPresenter presenter, Context context) {
         this.crashes = crashes;
@@ -60,6 +66,15 @@ public class CrashAdapter extends BaseItemProvider {
         return view;
     }
 
+    /**
+     * render.
+     *
+     * @param crashViewModel crashviewmodel
+     *
+     * @param presenter presenter
+     *
+     * @param componentContainer container
+     */
     public void render(final CrashViewModel crashViewModel, final CrashListPresenter presenter, Component componentContainer) {
         Text crashPlace = (Text) componentContainer.findComponentById(ResourceTable.Id_crash_place);
         Text crashDate = (Text) componentContainer.findComponentById(ResourceTable.Id_crash_date);

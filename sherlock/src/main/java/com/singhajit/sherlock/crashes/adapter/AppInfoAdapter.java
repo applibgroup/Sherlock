@@ -23,14 +23,18 @@ public class AppInfoAdapter extends BaseItemProvider {
     /**
      * AdapterContext.
      */
-    final private Context adapterContext;
+    private final Context adpContext;
 
     /**
      * AppInfoAdapter constructor.
+     *
+     * @param appInfoViewModel appinfo
+     *
+     * @param context context
      */
     public AppInfoAdapter(AppInfoViewModel appInfoViewModel, Context context) {
         this.appInfoViewModels = appInfoViewModel.getAppInfoRowViewModels();
-        this.adapterContext = context;
+        this.adpContext = context;
     }
 
     @Override
@@ -50,11 +54,18 @@ public class AppInfoAdapter extends BaseItemProvider {
 
     @Override
     public Component getComponent(int position, Component component, ComponentContainer componentContainer) {
-        Component view = LayoutBoost.inflate(adapterContext, ResourceTable.Layout_app_info_row, componentContainer, false);
+        Component view = LayoutBoost.inflate(adpContext, ResourceTable.Layout_app_info_row, componentContainer, false);
         render(appInfoViewModels.get(position), view);
         return view;
     }
 
+    /**
+     * render.
+     *
+     * @param appInfoViewModel appinfo
+     *
+     * @param componentContainer container
+     */
     public void render(AppInfoRowViewModel appInfoViewModel, Component componentContainer) {
         Text appInfoAttr = (Text) componentContainer.findComponentById(ResourceTable.Id_app_info_attr);
         Text appInfoVal = (Text) componentContainer.findComponentById(ResourceTable.Id_app_info_val);

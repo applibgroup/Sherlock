@@ -12,38 +12,38 @@ public class Crash {
     }
 
     public DeviceInfo getDeviceInfo() {
-    return new DeviceInfo.Builder().build();
-  }
+        return new DeviceInfo.Builder().build();
+    }
 
     public AppInfo getAppInfo() {
-    return new AppInfo();
-  }
+        return new AppInfo();
+    }
 
-    public void setId(int id) {
+    public void setId() {
         return;
     }
 
     public Class<Crash> getType() {
-    return Crash.class;
-  }
+        return Crash.class;
+    }
 
     public String getReason() {
-    return "";
-  }
+        return "";
+    }
 
     public String getStackTrace() {
-    return "";
-  }
+        return "";
+    }
 
     public String getPlace() {
-    return "";
-  }
+        return "";
+    }
 
     public int getId() {
-    return 0;
-  }
+        return 0;
+    }
 
     public Date getDate() {
-    return new Date();
-  }
+        return new Date();
+    }
 }

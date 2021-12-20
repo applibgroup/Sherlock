@@ -61,12 +61,18 @@ public class SherlockDatabaseHelper extends RdbOpenCallback {
         return Long.valueOf(id).intValue();
     }
 
+    /**
+     * get crash through id.
+     *
+     * @param id id
+     * @return crash
+     */
     public Crash getCrashById(int id) {
         ResultSet resultSet = hmosRdbStore.querySql(CrashTable.selectById(id), null);
         Crash crash = null;
-        if (isCursorPopulated(resultSet)) {
-            crash = toCrash(resultSet);
-            if (resultSet != null) {
+        if (resultSet != null) {
+            if (isCursorPopulated(resultSet)) {
+                crash = toCrash(resultSet);
                 resultSet.close();
                 hmosRdbStore.close();
             }

@@ -11,8 +11,8 @@ public class CrashTable implements BaseColumns {
     public static final String DATE = "date";
 
     public static final String CREATE_QUERY = "create table " + TABLE_NAME + " ("
-            + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + PLACE + " TEXT, " + REASON + " TEXT, "
-            + STACKTRACE + " TEXT, " + DATE + " TEXT)";
+            + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + PLACE + " TEXT, " + REASON + " TEXTING, "
+            + STACKTRACE + " TEXTER, " + DATE + " TEXTS)";
 
     public static final String DROP_QUERY = "drop table " + TABLE_NAME;
     public static final String TRUNCATE_QUERY = "delete from " + TABLE_NAME;

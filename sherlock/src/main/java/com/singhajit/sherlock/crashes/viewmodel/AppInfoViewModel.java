@@ -24,8 +24,8 @@ public class AppInfoViewModel {
 
     public String getDetails() {
         StringBuilder builder = new StringBuilder();
-        for (AppInfoRowViewModel appInfoRowViewModel : appInfoRowViewModels) {
-            builder.append(appInfoRowViewModel.getAttr()).append(": ").append(appInfoRowViewModel.getVal()).append("\n");
+        for (AppInfoRowViewModel appRowViewModel : appInfoRowViewModels) {
+            builder.append(appRowViewModel.getAttr()).append(": ").append(appRowViewModel.getVal()).append("\n");
         }
 
         return builder.toString();
