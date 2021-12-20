@@ -40,7 +40,7 @@ allprojects {
 
         source 'entry/src/main/java'
         source 'sherlock/src/main/java'
-        source ':sherlock_no_op/src/main/java'
+        source 'sherlock_no_op/src/main/java'
         include '**/*.java'
 
         classpath = files()
@@ -50,6 +50,7 @@ allprojects {
 checkstyle {
     toolVersion = '8.43'
 }
+
 sonarqube {
     properties {
         property "sonar.projectKey", "applibgroup_Sherlock"
