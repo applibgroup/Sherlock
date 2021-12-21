@@ -1,64 +1,86 @@
 package com.singhajit.sherlock.crashes.adapter;
 
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-
-import com.singhajit.sherlock.R;
+import ohos.agp.components.BaseItemProvider;
+import ohos.agp.components.Component;
+import ohos.agp.components.ComponentContainer;
+import ohos.agp.components.Text;
+import ohos.agp.render.layoutboost.LayoutBoost;
+import ohos.app.Context;
+import com.example.sherlock.ResourceTable;
 import com.singhajit.sherlock.core.investigation.CrashViewModel;
 import com.singhajit.sherlock.crashes.presenter.CrashListPresenter;
 
 import java.util.List;
 
-public class CrashAdapter extends RecyclerView.Adapter<CrashViewHolder> {
-  private final List<CrashViewModel> crashes;
-  private final CrashListPresenter presenter;
+/**
+ * CrashAdapter.
+ */
+public class CrashAdapter extends BaseItemProvider {
+    /**
+     * crashes.
+     */
+    private final List<CrashViewModel> crashes;
+    /**
+     * presenter.
+     */
+    private final CrashListPresenter presenter;
+    /**
+     * adaptercontext.
+     */
+    private Context adapContext;
 
-  public CrashAdapter(List<CrashViewModel> crashes, CrashListPresenter presenter) {
-    this.crashes = crashes;
-    this.presenter = presenter;
-  }
+    /**
+     * CrashAdapter constructor.
+     *
+     * @param crashes crashes
+     *
+     * @param presenter presenter
+     *
+     * @param context context
+     */
+    public CrashAdapter(List<CrashViewModel> crashes, CrashListPresenter presenter, Context context) {
+        this.crashes = crashes;
+        this.presenter = presenter;
+        this.adapContext = context;
+    }
 
-  @Override
-  public CrashViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-    LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-    LinearLayout crashCardView = (LinearLayout) inflater.inflate(R.layout.crash_card, parent, false);
-    return new CrashViewHolder(crashCardView);
-  }
+    @Override
+    public int getCount() {
+        return 0;
+    }
 
-  @Override
-  public void onBindViewHolder(CrashViewHolder holder, int position) {
-    holder.render(crashes.get(position), presenter);
-  }
+    @Override
+    public Object getItem(int i) {
+        return null;
+    }
 
-  @Override
-  public int getItemCount() {
-    return crashes.size();
-  }
-}
+    @Override
+    public long getItemId(int i) {
+        return 0;
+    }
 
-class CrashViewHolder extends RecyclerView.ViewHolder {
-  private final LinearLayout rootView;
+    @Override
+    public Component getComponent(int pos, Component component, ComponentContainer componentContainer) {
+        Component view = LayoutBoost.inflate(adapContext, ResourceTable.Layout_crash_card, componentContainer, false);
+        render(crashes.get(pos), presenter, view);
+        return view;
+    }
 
-  CrashViewHolder(LinearLayout rootView) {
-    super(rootView);
-    this.rootView = rootView;
-  }
-
-  void render(final CrashViewModel crashViewModel, final CrashListPresenter presenter) {
-    TextView crashPlace = (TextView) rootView.findViewById(R.id.crash_place);
-    TextView crashDate = (TextView) rootView.findViewById(R.id.crash_date);
-
-    crashPlace.setText(crashViewModel.getPlace());
-    crashDate.setText(crashViewModel.getDate());
-    rootView.findViewById(R.id.crash_card_view).setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        presenter.onCrashClicked(crashViewModel);
-      }
-    });
-  }
+    /**
+     * render.
+     *
+     * @param crashViewModel crashviewmodel
+     *
+     * @param presenter presenter
+     *
+     * @param componentContainer container
+     */
+    public void render(CrashViewModel crashViewModel, CrashListPresenter presenter, Component componentContainer) {
+        Text crashPlace = (Text) componentContainer.findComponentById(ResourceTable.Id_crash_place);
+        Text crashDate = (Text) componentContainer.findComponentById(ResourceTable.Id_crash_date);
+        crashPlace.setText(crashViewModel.getPlace());
+        crashDate.setText(crashViewModel.getDate());
+        componentContainer.findComponentById(ResourceTable.Id_crash_card_view).setClickedListener(component ->
+                presenter.onCrashClicked(crashViewModel));
+    }
 }

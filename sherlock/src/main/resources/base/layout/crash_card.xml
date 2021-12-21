@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DirectionalLayout
+    xmlns:ohos1="http://schemas.huawei.com/res/ohos"
+    ohos1:id="$+id:crash_card_view"
+    ohos1:height="match_content"
+    ohos1:width="match_parent"
+    ohos1:orientation="vertical">
+
+
+    <Text
+        ohos1:id="$+id:crash_place"
+        ohos1:height="match_content"
+        ohos1:width="match_content"
+        ohos1:bottom_margin="10vp"
+        />
+
+    <Text
+        ohos1:id="$+id:crash_date"
+        ohos1:height="match_content"
+        ohos1:width="match_content"/>
+
+</DirectionalLayout>

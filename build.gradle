@@ -1,27 +1,62 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
-ext {
-    minSdkVersion = 16
-    targetSdkVersion = 26
-    compileSdkVersion = 26
-    buildToolsVersion = "25.0.2"
-    VERSION_NAME = "1.0.4"
-}
+apply plugin: 'com.huawei.ohos.app'
+apply plugin: 'org.sonarqube'
+apply plugin: 'checkstyle'
 
+//For instructions on signature configuration, see https://developer.harmonyos.com/en/docs/documentation/doc-guides/ide_debug_device-0000001053822404#section1112183053510
+ohos {
+    compileSdkVersion 6
+}
+	
 buildscript {
     repositories {
-        jcenter()
+        maven {
+            url 'https://repo.huaweicloud.com/repository/maven/'
+        }
+        maven {
+            url 'https://developer.huawei.com/repo/'
+        }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.0'
+        classpath 'com.huawei.ohos:hap:3.0.3.4'
+        classpath 'com.huawei.ohos:decctest:1.2.6.0'
+        classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:3.3"
     }
 }
 
 allprojects {
     repositories {
-        jcenter()
+        maven {
+            url 'https://repo.huaweicloud.com/repository/maven/'
+        }
+        maven {
+            url 'https://developer.huawei.com/repo/'
+        }
+    }
+
+    task checkstyle(type: Checkstyle) {
+        showViolations = true
+        configFile file("config/checkstyle.xml")
+
+        source 'entry/src/main/java'
+        source 'sherlock/src/main/java'
+        include '**/*.java'
+
+        classpath = files()
     }
 }
 
-task clean(type: Delete) {
-    delete rootProject.buildDir
+checkstyle {
+    toolVersion = '8.43'
+}
+
+sonarqube {
+    properties {
+        property "sonar.projectKey", "applibgroup_Sherlock"
+        property "sonar.organization", "applibgroup"
+        property "sonar.host.url", "https://sonarcloud.io"
+        property "sonar.sources", "entry,sherlock,sherlock_no_op"
+        property "sonar.java.binaries", "entry/build,sherlock/build"
+        property "sonar.java.checkstyle.reportPaths", "build/reports/checkstyle/checkstyle.xml"
+    }
 }

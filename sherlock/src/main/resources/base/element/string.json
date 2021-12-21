@@ -1,0 +1,16 @@
+{
+  "string": [
+    {
+      "name": "sherlock_library",
+      "value": "sherlock_library"
+    },
+    {
+      "name": "entry_MainAbility",
+      "value": "entry_MainAbility"
+    },
+    {
+      "name": "mainability_description",
+      "value": "Java_Empty Ability"
+    }
+  ]
+}

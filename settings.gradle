@@ -1,1 +1,1 @@
-include ':sherlock', ':sherlock-no-op'
+include ':entry', ':sherlock', ':sherlock_no_op'

@@ -1,21 +1,19 @@
 package com.singhajit.sherlock.core.investigation;
 
-
-import android.content.Context;
-
+import ohos.app.Context;
 import com.singhajit.sherlock.util.AppInfoUtil;
 
 public class DefaultAppInfoProvider implements AppInfoProvider {
-  private final Context context;
+    private final Context context;
 
-  public DefaultAppInfoProvider(Context context) {
+    public DefaultAppInfoProvider(Context context) {
     this.context = context;
   }
 
-  @Override
-  public AppInfo getAppInfo() {
-    return new AppInfo.Builder()
-        .with("Version", AppInfoUtil.getAppVersion(context))
-        .build();
+    @Override
+    public AppInfo getAppInfo() {
+        return new AppInfo.Builder()
+            .with("Version", AppInfoUtil.getAppVersion(context))
+            .build();
   }
 }

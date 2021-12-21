@@ -1,93 +1,77 @@
 package com.singhajit.sherlock.crashes.activity;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.TextView;
-
-import com.singhajit.sherlock.R;
-import com.singhajit.sherlock.core.database.SherlockDatabaseHelper;
+import ohos.aafwk.ability.Ability;
+import ohos.aafwk.content.Intent;
+import ohos.agp.components.DirectionalLayoutManager;
+import ohos.agp.components.ListContainer;
+import ohos.agp.components.Text;
+import com.example.sherlock.ResourceTable;
 import com.singhajit.sherlock.core.investigation.CrashViewModel;
 import com.singhajit.sherlock.crashes.action.CrashActions;
 import com.singhajit.sherlock.crashes.adapter.AppInfoAdapter;
-import com.singhajit.sherlock.crashes.presenter.CrashPresenter;
 import com.singhajit.sherlock.crashes.viewmodel.AppInfoViewModel;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 
-public class CrashActivity extends BaseActivity implements CrashActions {
-  public static final String CRASH_ID = "com.singhajit.sherlock.CRASH_ID";
-  private CrashViewModel viewModel = new CrashViewModel();
-  private CrashPresenter presenter;
+/**
+ * Crash Activity.
+ */
+public class CrashActivity extends Ability implements CrashActions {
 
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    Intent intent = getIntent();
-    int crashId = intent.getIntExtra(CRASH_ID, -1);
-    setContentView(R.layout.crash_activity);
+    /**
+     * CRASH ID.
+     */
+    public static final String CRASH_ID = "com.singhajit.sherlock.CRASH_ID";
 
-    enableHomeButton((Toolbar) findViewById(R.id.toolbar));
-    setTitle(R.string.crash_report);
-
-    presenter = new CrashPresenter(new SherlockDatabaseHelper(this), this);
-    presenter.render(crashId);
-  }
-
-  @Override
-  public boolean onCreateOptionsMenu(Menu menu) {
-    getMenuInflater().inflate(R.menu.crash_menu, menu);
-    return true;
-  }
-
-  @Override
-  public boolean onOptionsItemSelected(MenuItem item) {
-    if (item.getItemId() == R.id.share) {
-      presenter.shareCrashDetails(viewModel);
-      return true;
+    @Override
+    protected void onStart(Intent intent) {
+        super.onStart(intent);
+        super.setUIContent(ResourceTable.Layout_crash_activity);
+        Intent dataIntent = getIntent();
+        if (null != dataIntent) {
+            Throwable throwable = dataIntent.getSerializableParam("crash");
+            StringWriter errors = new StringWriter();
+            throwable.printStackTrace(new PrintWriter(errors));
+            Text text = (Text) findComponentById(ResourceTable.Id_crash);
+            text.setText(errors.toString());
+        }
     }
-    return super.onOptionsItemSelected(item);
-  }
 
-  @Override
-  public void render(CrashViewModel viewModel) {
-    this.viewModel = viewModel;
-    TextView crashLocation = (TextView) findViewById(R.id.crash_location);
-    TextView crashReason = (TextView) findViewById(R.id.crash_reason);
-    TextView stackTrace = (TextView) findViewById(R.id.stacktrace);
+    @Override
+    public void render(CrashViewModel viewModel) {
+        Text crashLocation = (Text) findComponentById(ResourceTable.Id_crash_location);
+        Text crashReason = (Text) findComponentById(ResourceTable.Id_crash_reason);
+        Text stackTrace = (Text) findComponentById(ResourceTable.Id_activity_main);
 
-    crashLocation.setText(viewModel.getExactLocationOfCrash());
-    crashReason.setText(viewModel.getReasonOfCrash());
-    stackTrace.setText(viewModel.getStackTrace());
+        crashLocation.setText(viewModel.getExactLocationOfCrash());
+        crashReason.setText(viewModel.getReasonOfCrash());
+        stackTrace.setText(viewModel.getStackTrace());
 
-    renderDeviceInfo(viewModel);
-  }
+        renderDeviceInfo(viewModel);
+    }
 
-  @Override
-  public void openSendApplicationChooser(String crashDetails) {
-    Intent share = new Intent(Intent.ACTION_SEND);
-    share.setType("text/plain");
-    share.putExtra(Intent.EXTRA_TEXT, crashDetails);
+    @Override
+    public void openSendApplicationChooser(String crashDetails) {
+        Intent share = new Intent();
+        share.setType("text/plain");
+        share.setParam(Intent.ACTION_TRANSLATE_TEXT, crashDetails);
+        startAbility(Intent.createSelectIntent(share, "Share Crash Using"));
+    }
 
-    startActivity(Intent.createChooser(share, getString(R.string.share_dialog_message)));
-  }
+    @Override
+    public void renderAppInfo(AppInfoViewModel viewModel) {
+        ListContainer appInfoDetails = (ListContainer) findComponentById(ResourceTable.Id_app_info_details);
+        appInfoDetails.setItemProvider(new AppInfoAdapter(viewModel, this));
+        appInfoDetails.setLayoutManager(new DirectionalLayoutManager());
+    }
 
-  @Override
-  public void renderAppInfo(AppInfoViewModel viewModel) {
-    RecyclerView appInfoDetails = (RecyclerView) findViewById(R.id.app_info_details);
-    appInfoDetails.setAdapter(new AppInfoAdapter(viewModel));
-    appInfoDetails.setLayoutManager(new LinearLayoutManager(this));
-  }
+    private void renderDeviceInfo(CrashViewModel viewModel) {
+        Text deviceName = (Text) findComponentById(ResourceTable.Id_crash_reason);
+        Text deviceBrand = (Text) findComponentById(ResourceTable.Id_crash_reason);
+        Text deviceAndroidVersion = (Text) findComponentById(ResourceTable.Id_crash_reason);
 
-  private void renderDeviceInfo(CrashViewModel viewModel) {
-    TextView deviceName = (TextView) findViewById(R.id.device_name);
-    TextView deviceBrand = (TextView) findViewById(R.id.device_brand);
-    TextView deviceAndroidVersion = (TextView) findViewById(R.id.device_android_version);
-
-    deviceName.setText(viewModel.getDeviceName());
-    deviceBrand.setText(viewModel.getDeviceBrand());
-    deviceAndroidVersion.setText(viewModel.getDeviceAndroidApiVersion());
-  }
+        deviceName.setText(viewModel.getDeviceName());
+        deviceBrand.setText(viewModel.getDeviceBrand());
+        deviceAndroidVersion.setText(viewModel.getDeviceAndroidApiVersion());
+    }
 }

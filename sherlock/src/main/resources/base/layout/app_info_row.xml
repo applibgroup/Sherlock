@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DirectionalLayout
+    xmlns:ohos1="http://schemas.huawei.com/res/ohos"
+    ohos1:height="match_parent"
+    ohos1:width="match_parent"
+    ohos1:orientation="vertical">
+
+    <Text
+        ohos1:id="$+id:app_info_attr"
+        ohos1:height="match_content"
+        ohos1:width="match_content"
+        />
+
+    <Text
+        ohos1:id="$+id:app_info_val"
+        ohos1:height="match_content"
+        ohos1:width="match_parent"
+        ohos1:text="21"
+        />
+</DirectionalLayout>

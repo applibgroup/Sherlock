@@ -1,71 +1,72 @@
 package com.singhajit.sherlock.core.investigation;
 
-import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Context;
-import android.content.Intent;
-import android.os.Build;
-import android.support.v4.app.TaskStackBuilder;
-import android.support.v4.content.ContextCompat;
-
-import com.singhajit.sherlock.R;
-import com.singhajit.sherlock.crashes.activity.CrashActivity;
-
-import static android.app.NotificationManager.IMPORTANCE_DEFAULT;
-import static android.app.PendingIntent.FLAG_UPDATE_CURRENT;
+import ohos.aafwk.content.Intent;
+import ohos.aafwk.content.Operation;
+import ohos.app.Context;
+import ohos.event.intentagent.IntentAgent;
+import ohos.event.intentagent.IntentAgentConstant;
+import ohos.event.intentagent.IntentAgentHelper;
+import ohos.event.intentagent.IntentAgentInfo;
+import ohos.event.notification.NotificationHelper;
+import ohos.event.notification.NotificationRequest;
+import ohos.rpc.RemoteException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class CrashReporter {
-  private final Context context;
-  private String CHANNEL_ID = "com.singhajit.com.221B";
+    /**
+     * context.
+     */
+    private final Context context;
 
-  public CrashReporter(Context context) {
-    this.context = context;
-  }
-
-  public void report(CrashViewModel crashViewModel) {
-    Notification notification = notification(crashViewModel);
-
-    NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-      NotificationChannel channel = new NotificationChannel(
-          CHANNEL_ID,
-          "Sherlock",
-          IMPORTANCE_DEFAULT
-      );
-      notificationManager.createNotificationChannel(channel);
+    /**
+     * constructor.
+     *
+     * @param context context
+     */
+    public CrashReporter(Context context) {
+        this.context = context;
     }
 
-    notificationManager.notify(crashViewModel.getIdentifier(), notification);
-  }
-
-  private Notification notification(CrashViewModel crashViewModel) {
-    Intent crashActivityIntent = new Intent(context, CrashActivity.class);
-    crashActivityIntent.putExtra(CrashActivity.CRASH_ID, crashViewModel.getIdentifier());
-
-    TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
-    stackBuilder.addParentStack(CrashActivity.class);
-    stackBuilder.addNextIntent(crashActivityIntent);
-
-    PendingIntent pendingIntent = stackBuilder.getPendingIntent(221, FLAG_UPDATE_CURRENT);
-
-    Notification.Builder notificationBuilder = new Notification.Builder(context)
-        .setContentTitle(crashViewModel.getPlace())
-        .setContentText(crashViewModel.getDate())
-        .setSmallIcon(R.mipmap.ic_stat_sherlock_logo)
-        .setContentIntent(pendingIntent)
-        .setAutoCancel(true);
-
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-      notificationBuilder.setColor(ContextCompat.getColor(context, R.color.sherlock_colorAccent));
+    /**
+     * creates a notification.
+     *
+     * @param throwable throwable
+     */
+    public void reportCollection(Throwable throwable) {
+        NotificationRequest notification = new NotificationRequest();
+        NotificationRequest.NotificationNormalContent content = new NotificationRequest.NotificationNormalContent();
+        content.setTitle(context.getBundleName());
+        content.setText(throwable.getMessage() + "\n" + new Date().toString());
+        NotificationRequest.NotificationContent notificationContent = new NotificationRequest
+                .NotificationContent(content);
+        notification.setTapDismissed(true);
+        notification.setContent(notificationContent);
+        notification.setIntentAgent(getLaunchAction(throwable));
+        try {
+            NotificationHelper.publishNotification(notification);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }
 
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-      notificationBuilder.setChannelId(CHANNEL_ID);
+    /**
+     * intent to particular screen.
+     */
+    private IntentAgent getLaunchAction(Throwable ex) {
+        Operation operation = new Intent.OperationBuilder().withDeviceId("").withBundleName(context.getBundleName())
+                .withAbilityName("com.singhajit.sherlock.crashes.activity.CrashActivity").build();
+        Intent intent = new Intent();
+        intent.setParam("crash", ex);
+        intent.setOperation(operation);
+        List<Intent> intentList = new ArrayList<>();
+        intentList.add(intent);
+        List<IntentAgentConstant.Flags> flags = new ArrayList<>();
+        flags.add(IntentAgentConstant.Flags.UPDATE_PRESENT_FLAG);
+        IntentAgentInfo params = new IntentAgentInfo(90, IntentAgentConstant.OperationType.START_ABILITY, flags,
+                intentList, null);
+        return IntentAgentHelper.getIntentAgent(context, params);
     }
 
-    return notificationBuilder.build();
-  }
 }
