@@ -2,14 +2,15 @@
 
 Sherlock reports any crash that occurres in your application as a notification. You just need to initialize Sherlock at the start of your application and it will take care of the rest. 
 
-# Source
+## Introduction
 
-The code in this repository was inspired from [ajitsing/sherlock - 1.0.4](https://github.com/ajitsing/Sherlock). We are very thankful to ajitsing.
-
-## Motivation
 The motivation behind creating Sherlock is to make the life of Developer and tester easier. Whenever a tester is testing
 the app and he/she encounters a crash, most of the time they don't have enough details in their hand to enable developer to
 start fixing the crash immediately. Now with the help of Sherlock, any tester will have enough info to report the crash.
+
+# Source
+
+The code in this repository was inspired from [ajitsing/sherlock - 1.0.4](https://github.com/ajitsing/Sherlock). We are very thankful to ajitsing.
 
 Screenshot
 ----------
@@ -35,7 +36,7 @@ dependencies {
 
 Usage
 -----
-II). Usage in java - Sherlock library has init API:
+Usage in java - Sherlock library has init API:
 	
 	Sherlock.init(this)
 
