@@ -60,7 +60,7 @@ Currently there is a limitation to
 
 ## Contributing
 You can contribute to Sherlock by forking the repo and creating pull requests. You can also contribute by reporting bugs/issues.
-If you want to see a new feature in Sherlock, just add as an issue with enough details.
+If you want to see a new feature in Sherlock, just add that as an issue with enough details.
 
 LICENSE
 -------
