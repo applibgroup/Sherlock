@@ -1,3 +1,4 @@
+[![.github/workflows/main.yml](https://github.com/applibgroup/Sherlock/actions/workflows/main.yml/badge.svg)](https://github.com/applibgroup/Sherlock/actions/workflows/main.yml)
 # Sherlock
 
 Sherlock reports any crash that occurres in your application as a notification. You just need to initialize Sherlock at the start of your application and it will take care of the rest. 
@@ -33,7 +34,14 @@ dependencies {
         testImplementation 'junit:junit:4.12'
 }
 ```
-
+III) For using Sherlock from a remote repository in separate application, add the below dependencies in entry/build.gradle file.
+```
+dependencies {
+        implementation 'dev.applibgroup:sherlock:1.0.0'
+        testImplementation 'junit:junit:4.13'
+        ohosTestImplementation 'com.huawei.ohos.testkit:runner:1.0.0.100'
+}
+```
 Usage
 -----
 Usage in java - Sherlock library has init API:
